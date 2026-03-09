@@ -1,0 +1,5 @@
+{
+  "name": "Semera Digital Guide",
+  "description": "A comprehensive digital guide for Semera, Ethiopia, featuring local attractions, travel tips, and an AI-powered assistant.",
+  "requestFramePermissions": ["geolocation"]
+}
