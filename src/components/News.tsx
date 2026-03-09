@@ -165,17 +165,25 @@ export default function News() {
 
                 {item.videoUrl && (
                   <div className="mb-6 rounded-xl overflow-hidden border border-[#00f2ff]/20 aspect-video bg-black flex items-center justify-center group/video">
-                    <a 
-                      href={item.videoUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex flex-col items-center gap-3 text-[#00f2ff]/50 group-hover/video:text-[#00f2ff] transition-colors"
-                    >
-                      <div className="w-16 h-16 rounded-full border-2 border-current flex items-center justify-center">
-                        <ArrowRight size={32} />
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest">ቪድዮውን ይመልከቱ (Watch Video)</span>
-                    </a>
+                    {item.videoUrl.startsWith('data:video') ? (
+                      <video 
+                        src={item.videoUrl} 
+                        controls 
+                        className="w-full h-full"
+                      />
+                    ) : (
+                      <a 
+                        href={item.videoUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center gap-3 text-[#00f2ff]/50 group-hover/video:text-[#00f2ff] transition-colors"
+                      >
+                        <div className="w-16 h-16 rounded-full border-2 border-current flex items-center justify-center">
+                          <ArrowRight size={32} />
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">ቪድዮውን ይመልከቱ (Watch Video)</span>
+                      </a>
+                    )}
                   </div>
                 )}
 

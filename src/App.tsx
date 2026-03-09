@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Hero from './components/Hero';
 import AttractionsCarousel from './components/AttractionsCarousel';
 import Attractions from './components/Attractions';
+import EventsCalendar from './components/EventsCalendar';
 import TravelTips from './components/TravelTips';
 import ChatGuide from './components/ChatGuide';
 import Directory from './components/Directory';
@@ -210,6 +211,7 @@ export default function App() {
 
             <AttractionsCarousel />
             <Attractions />
+            <EventsCalendar />
             
             {/* Culture Section */}
             <section className="py-24 bg-orange-50 overflow-hidden">

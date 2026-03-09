@@ -28,3 +28,13 @@ export interface Message {
   role: 'user' | 'model';
   text: string;
 }
+
+export interface LocalEvent {
+  id: string;
+  title: string;
+  date: string; // ISO format (YYYY-MM-DD)
+  time: string;
+  description: string;
+  location: string;
+  category: 'festival' | 'business' | 'community' | 'tourism';
+}
