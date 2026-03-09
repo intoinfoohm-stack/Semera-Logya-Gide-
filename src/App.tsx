@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Hero from './components/Hero';
+import AttractionsCarousel from './components/AttractionsCarousel';
 import Attractions from './components/Attractions';
 import TravelTips from './components/TravelTips';
 import ChatGuide from './components/ChatGuide';
@@ -207,6 +208,7 @@ export default function App() {
               </div>
             </section>
 
+            <AttractionsCarousel />
             <Attractions />
             
             {/* Culture Section */}
