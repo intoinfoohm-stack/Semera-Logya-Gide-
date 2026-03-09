@@ -5,11 +5,17 @@ import TravelTips from './components/TravelTips';
 import ChatGuide from './components/ChatGuide';
 import Directory from './components/Directory';
 import News from './components/News';
-import { Compass, MapPin, Newspaper } from 'lucide-react';
+import Feedback from './components/Feedback';
+import Admin from './components/Admin';
+import About from './components/About';
+import Contact from './components/Contact';
+import { Compass, MapPin, Newspaper, MessageSquare, Settings, Home as HomeIcon, Info, PhoneCall, Menu, X } from 'lucide-react';
 import { cn } from './lib/utils';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'places' | 'news'>('places');
+  const [activeTab, setActiveTab] = useState<'places' | 'news' | 'feedback' | 'admin'>('places');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'contact'>('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -24,108 +30,239 @@ export default function App() {
           </div>
           
           <div className="hidden md:flex items-center gap-8">
-            <a href="#attractions" className="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors">መስህቦች</a>
-            <a href="#directory" className="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors">ተቋማት</a>
-            <a href="#" className="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors">መረጃ</a>
-            <button className="bg-white text-stone-900 border border-stone-200 px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-stone-50 transition-colors shadow-sm">
+            <button 
+              onClick={() => setCurrentPage('home')}
+              className={cn(
+                "text-sm font-medium transition-colors flex items-center gap-2",
+                currentPage === 'home' ? "text-orange-600" : "text-stone-600 hover:text-orange-600"
+              )}
+            >
+              <HomeIcon size={16} />
+              መነሻ (Home)
+            </button>
+            <button 
+              onClick={() => setCurrentPage('about')}
+              className={cn(
+                "text-sm font-medium transition-colors flex items-center gap-2",
+                currentPage === 'about' ? "text-orange-600" : "text-stone-600 hover:text-orange-600"
+              )}
+            >
+              <Info size={16} />
+              ስለ እኛ (About)
+            </button>
+            <button 
+              onClick={() => setCurrentPage('contact')}
+              className={cn(
+                "text-sm font-medium transition-colors flex items-center gap-2",
+                currentPage === 'contact' ? "text-orange-600" : "text-stone-600 hover:text-orange-600"
+              )}
+            >
+              <PhoneCall size={16} />
+              ያግኙን (Contact)
+            </button>
+            <button 
+              onClick={() => {
+                setCurrentPage('home');
+                setTimeout(() => {
+                  document.getElementById('directory')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              }}
+              className="bg-white text-stone-900 border border-stone-200 px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-stone-50 transition-colors shadow-sm"
+            >
               አሁኑኑ ይጎብኙ
             </button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden p-2 text-stone-600"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-b border-stone-100 py-4 px-6 space-y-4 animate-in slide-in-from-top duration-300">
+            <button 
+              onClick={() => {
+                setCurrentPage('home');
+                setIsMobileMenuOpen(false);
+              }}
+              className={cn(
+                "w-full text-left py-2 text-sm font-medium flex items-center gap-3",
+                currentPage === 'home' ? "text-orange-600" : "text-stone-600"
+              )}
+            >
+              <HomeIcon size={18} />
+              መነሻ (Home)
+            </button>
+            <button 
+              onClick={() => {
+                setCurrentPage('about');
+                setIsMobileMenuOpen(false);
+              }}
+              className={cn(
+                "w-full text-left py-2 text-sm font-medium flex items-center gap-3",
+                currentPage === 'about' ? "text-orange-600" : "text-stone-600"
+              )}
+            >
+              <Info size={18} />
+              ስለ እኛ (About)
+            </button>
+            <button 
+              onClick={() => {
+                setCurrentPage('contact');
+                setIsMobileMenuOpen(false);
+              }}
+              className={cn(
+                "w-full text-left py-2 text-sm font-medium flex items-center gap-3",
+                currentPage === 'contact' ? "text-orange-600" : "text-stone-600"
+              )}
+            >
+              <PhoneCall size={18} />
+              ያግኙን (Contact)
+            </button>
+          </div>
+        )}
       </nav>
 
       <main className="flex-grow pt-20">
-        <Hero />
-        
-        {/* Directory & News Section */}
-        <section className="py-24 bg-white" id="directory">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-stone-900 mb-4">የከተማ መመሪያ (City Directory)</h2>
-              <p className="text-stone-500 max-w-2xl mx-auto font-ethiopic">
-                በሰመራ እና ሎግያ ከተሞች የሚገኙ ተቋማትን እና ወቅታዊ ዜናዎችን እዚህ ያገኛሉ።
-              </p>
-            </div>
-
-            <div className="max-w-4xl mx-auto">
-              {/* Tabs */}
-              <div className="flex p-1 bg-stone-200 rounded-2xl mb-8 w-fit mx-auto">
-                <button
-                  onClick={() => setActiveTab('places')}
-                  className={cn(
-                    "flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all",
-                    activeTab === 'places' ? "bg-white text-orange-600 shadow-sm" : "text-stone-500 hover:text-stone-700"
-                  )}
-                >
-                  <MapPin size={18} />
-                  <span>📍 ቦታዎች (Places)</span>
-                </button>
-                <button
-                  onClick={() => setActiveTab('news')}
-                  className={cn(
-                    "flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all",
-                    activeTab === 'news' ? "bg-white text-orange-600 shadow-sm" : "text-stone-500 hover:text-stone-700"
-                  )}
-                >
-                  <Newspaper size={18} />
-                  <span>📰 ዜናዎች (News)</span>
-                </button>
-              </div>
-
-              {/* Tab Content */}
-              <div className="min-h-[400px]">
-                {activeTab === 'places' ? <Directory /> : <News />}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Attractions />
-        
-        {/* Culture Section */}
-        <section className="py-24 bg-orange-50 overflow-hidden">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div className="relative">
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                  <img 
-                    src="https://images.unsplash.com/photo-1523805081446-ed9a96a2b5d9?auto=format&fit=crop&q=80&w=1000" 
-                    alt="Afar Culture" 
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-orange-600 rounded-3xl flex items-center justify-center p-8 text-white shadow-xl hidden md:flex">
-                  <p className="text-center font-bold text-lg leading-tight">
-                    የአፋር ኩራት እና እንግዳ ተቀባይነት
+        {currentPage === 'home' ? (
+          <>
+            <Hero />
+            
+            {/* Directory & News Section */}
+            <section className="py-24 bg-white" id="directory">
+              <div className="container mx-auto px-6">
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl font-bold text-stone-900 mb-4">የከተማ መመሪያ (City Directory)</h2>
+                  <p className="text-stone-500 max-w-2xl mx-auto font-ethiopic">
+                    በሰመራ እና ሎግያ ከተሞች የሚገኙ ተቋማትን እና ወቅታዊ ዜናዎችን እዚህ ያገኛሉ።
                   </p>
                 </div>
-              </div>
-              
-              <div>
-                <span className="text-orange-600 font-bold tracking-widest uppercase text-sm mb-4 block">ባህል እና ወግ</span>
-                <h2 className="text-4xl md:text-5xl font-bold text-stone-900 mb-6 leading-tight">
-                  የአፋርን ህዝብ ድንቅ ባህል ይለማመዱ
-                </h2>
-                <p className="text-stone-600 mb-8 text-lg leading-relaxed font-ethiopic">
-                  የአፋር ህዝብ በጠንካራነታቸው፣ በልዩ ባህላቸው እና በታላቅ እንግዳ ተቀባይነታቸው ይታወቃሉ። በሰመራ ቆይታዎ ወቅት የአፋርን ባህላዊ ምግቦች፣ ጭፈራዎች እና የአኗኗር ዘይቤዎችን የመመልከት እድል ያገኛሉ።
-                </p>
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="p-4 bg-white rounded-2xl shadow-sm border border-orange-100">
-                    <h4 className="font-bold text-stone-900 mb-1">ባህላዊ ምግብ</h4>
-                    <p className="text-stone-500 text-sm">ልዩ የአፋር ጣዕሞች</p>
+
+                <div className="max-w-4xl mx-auto">
+                  {/* Tech-styled Tabs */}
+                  <div className="flex flex-wrap gap-3 mb-10 w-full max-w-2xl mx-auto">
+                    <button
+                      onClick={() => setActiveTab('places')}
+                      className={cn(
+                        "flex-1 min-w-[120px] flex items-center justify-center gap-2 p-4 border-2 transition-all font-bold uppercase tracking-widest text-[10px]",
+                        activeTab === 'places' 
+                          ? "bg-[#00f2ff] border-[#00f2ff] text-[#0a192f] shadow-[0_0_15px_rgba(0,242,255,0.4)]" 
+                          : "bg-[#112240] border-[#00f2ff] text-[#00f2ff] hover:bg-[#00f2ff]/10"
+                      )}
+                    >
+                      <MapPin size={14} />
+                      <span>ቦታዎች (Places)</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('news')}
+                      className={cn(
+                        "flex-1 min-w-[120px] flex items-center justify-center gap-2 p-4 border-2 transition-all font-bold uppercase tracking-widest text-[10px]",
+                        activeTab === 'news' 
+                          ? "bg-[#00f2ff] border-[#00f2ff] text-[#0a192f] shadow-[0_0_15px_rgba(0,242,255,0.4)]" 
+                          : "bg-[#112240] border-[#00f2ff] text-[#00f2ff] hover:bg-[#00f2ff]/10"
+                      )}
+                    >
+                      <Newspaper size={14} />
+                      <span>ዜናዎች (News)</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('feedback')}
+                      className={cn(
+                        "flex-1 min-w-[120px] flex items-center justify-center gap-2 p-4 border-2 transition-all font-bold uppercase tracking-widest text-[10px]",
+                        activeTab === 'feedback' 
+                          ? "bg-[#00f2ff] border-[#00f2ff] text-[#0a192f] shadow-[0_0_15px_rgba(0,242,255,0.4)]" 
+                          : "bg-[#112240] border-[#00f2ff] text-[#00f2ff] hover:bg-[#00f2ff]/10"
+                      )}
+                    >
+                      <MessageSquare size={14} />
+                      <span>አስተያየት (Feedback)</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('admin')}
+                      className={cn(
+                        "flex-1 min-w-[120px] flex items-center justify-center gap-2 p-4 border-2 transition-all font-bold uppercase tracking-widest text-[10px]",
+                        activeTab === 'admin' 
+                          ? "bg-[#00f2ff] border-[#00f2ff] text-[#0a192f] shadow-[0_0_15px_rgba(0,242,255,0.4)]" 
+                          : "bg-[#112240] border-[#00f2ff] text-[#00f2ff] hover:bg-[#00f2ff]/10"
+                      )}
+                    >
+                      <Settings size={14} />
+                      <span>አስተዳደር (Admin)</span>
+                    </button>
                   </div>
-                  <div className="p-4 bg-white rounded-2xl shadow-sm border border-orange-100">
-                    <h4 className="font-bold text-stone-900 mb-1">ኪነ-ጥበብ</h4>
-                    <p className="text-stone-500 text-sm">ባህላዊ አልባሳት እና ጌጣጌጦች</p>
+
+                  {/* Tab Content */}
+                  <div className="min-h-[400px]">
+                    {activeTab === 'places' && <Directory />}
+                    {activeTab === 'news' && <News />}
+                    {activeTab === 'feedback' && <Feedback />}
+                    {activeTab === 'admin' && <Admin />}
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
 
-        <TravelTips />
+            <Attractions />
+            
+            {/* Culture Section */}
+            <section className="py-24 bg-orange-50 overflow-hidden">
+              <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                  <div className="relative">
+                    <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+                      <img 
+                        src="https://images.unsplash.com/photo-1523805081446-ed9a96a2b5d9?auto=format&fit=crop&q=80&w=1000" 
+                        alt="Afar Culture" 
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-orange-600 rounded-3xl flex items-center justify-center p-8 text-white shadow-xl hidden md:flex">
+                      <p className="text-center font-bold text-lg leading-tight">
+                        የአፋር ኩራት እና እንግዳ ተቀባይነት
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <span className="text-orange-600 font-bold tracking-widest uppercase text-sm mb-4 block">ባህል እና ወግ</span>
+                    <h2 className="text-4xl md:text-5xl font-bold text-stone-900 mb-6 leading-tight">
+                      የአፋርን ህዝብ ድንቅ ባህል ይለማመዱ
+                    </h2>
+                    <p className="text-stone-600 mb-8 text-lg leading-relaxed font-ethiopic">
+                      የአፋር ህዝብ በጠንካራነታቸው፣ በልዩ ባህላቸው እና በታላቅ እንግዳ ተቀባይነታቸው ይታወቃሉ። በሰመራ ቆይታዎ ወቅት የአፋርን ባህላዊ ምግቦች፣ ጭፈራዎች እና የአኗኗር ዘይቤዎችን የመመልከት እድል ያገኛሉ።
+                    </p>
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="p-4 bg-white rounded-2xl shadow-sm border border-orange-100">
+                        <h4 className="font-bold text-stone-900 mb-1">ባህላዊ ምግብ</h4>
+                        <p className="text-stone-500 text-sm">ልዩ የአፋር ጣዕሞች</p>
+                      </div>
+                      <div className="p-4 bg-white rounded-2xl shadow-sm border border-orange-100">
+                        <h4 className="font-bold text-stone-900 mb-1">ኪነ-ጥበብ</h4>
+                        <p className="text-stone-500 text-sm">ባህላዊ አልባሳት እና ጌጣጌጦች</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <TravelTips />
+          </>
+        ) : currentPage === 'about' ? (
+          <div className="container mx-auto px-6 py-12">
+            <About />
+          </div>
+        ) : (
+          <div className="container mx-auto px-6 py-12">
+            <Contact />
+          </div>
+        )}
       </main>
 
       {/* Footer */}

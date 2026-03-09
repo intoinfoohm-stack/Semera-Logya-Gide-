@@ -6,30 +6,51 @@ import { MapPin, ArrowRight } from 'lucide-react';
 const ATTRACTIONS: Attraction[] = [
   {
     id: '1',
-    title: 'Erta Ale Volcano',
-    description: 'One of the few volcanoes in the world that has an almost persistent lava lake. A truly otherworldly experience.',
-    imageUrl: 'https://images.unsplash.com/photo-1541845157-a6d2d100c931?auto=format&fit=crop&q=80&w=800',
-    category: 'nature'
+    title: 'አስቦ-ዳዓ (Asbo-Daa)',
+    description: 'ባህላዊ የድንጋይ ወፍጮ የሚሰራበት ታሪካዊ ተራራ።',
+    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800',
+    category: 'history'
   },
   {
     id: '2',
-    title: 'Dallol Hydrothermal Field',
-    description: 'A landscape of salt, sulfur, and mineral deposits creating vibrant neon colors. The hottest inhabited place on Earth.',
-    imageUrl: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&q=80&w=800',
+    title: 'የሎማ ድንቅ ሐይቆች (Loma Lakes)',
+    description: 'ቀይ ሎማ እና አረንጓዴው ሎማ ሐይቅ - ልዩ የተፈጥሮ ውበት።',
+    imageUrl: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800',
     category: 'nature'
   },
   {
     id: '3',
-    title: 'Afar Cultural Heritage',
-    description: 'Experience the rich traditions of the Afar people, their unique architecture, and world-renowned hospitality.',
-    imageUrl: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80&w=800',
-    category: 'culture'
+    title: 'አላሎ ባድ (Alallo Bad)',
+    description: 'የሚንተከተኩ የፍል ውሃ ምንጮች እና አስደናቂው ተፈጥሮ።',
+    imageUrl: 'https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&q=80&w=800',
+    category: 'nature'
   },
   {
     id: '4',
-    title: 'Lake Afdera',
-    description: 'A hypersaline lake located in the Danakil Depression, used for salt extraction and offering stunning views.',
-    imageUrl: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800',
+    title: 'አፋንቦ አቢ ሐይቅ (Afambo Abi Lake)',
+    description: 'የአዋሽ ወንዝ መስረጊያ እና የአእዋፋት መገኛ።',
+    imageUrl: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?auto=format&fit=crop&q=80&w=800',
+    category: 'nature'
+  },
+  {
+    id: '5',
+    title: 'የሱልጣን አሊሚራህ ቤተ-መንግስት',
+    description: 'አሳይታ - የታሪክና የባህል ማዕከል የሆነ ታሪካዊ ቤተ-መንግስት።',
+    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800',
+    category: 'culture'
+  },
+  {
+    id: '6',
+    title: 'ቦራውሊ አሌ (Borawli Ale)',
+    description: 'የልጅ እያሱ መቀመጫ የነበረው ታሪካዊ ተራራ።',
+    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800',
+    category: 'history'
+  },
+  {
+    id: '7',
+    title: 'ሐርሲስ ፍል ውሃ (Harsis Hot Springs)',
+    description: 'ለባህላዊ ህክምና አገልግሎት የሚታወቅ የተፈጥሮ ፈውስ ቦታ።',
+    imageUrl: 'https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&q=80&w=800',
     category: 'nature'
   }
 ];

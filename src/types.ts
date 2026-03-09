@@ -3,7 +3,7 @@ export interface Attraction {
   title: string;
   description: string;
   imageUrl: string;
-  category: 'nature' | 'culture' | 'landmark';
+  category: 'nature' | 'culture' | 'landmark' | 'history';
 }
 
 export interface Place {
@@ -20,6 +20,8 @@ export interface NewsItem {
   title: string;
   date: string;
   summary: string;
+  imageUrl?: string;
+  videoUrl?: string;
 }
 
 export interface Message {
